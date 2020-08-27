@@ -26,9 +26,11 @@ services:
     ports:
       - 9988:80
 
-  marie_bot:
-    build: .
-    container_name: marie_bot
-    restart: always
-    links:
-      - mysql
+#  marie_bot:
+#    build: .
+#    container_name: marie_bot
+#    restart: always
+#    links:
+#      - mysql
+#    volumes:
+#      - "./config.py:/bot_marie/config.py"
