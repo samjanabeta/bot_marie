@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: marie_bot
+      MYSQL_ROOT_PASSWORD: 123456
+    volumes:
+      - "$PWD/mysql:/var/lib/mysql"
+    ports:
+      - 3306:3306
+
+  phpMyAdmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    ports:
+      - 9988:80
+
+  marie_bot:
+    build: .
+    container_name: marie_bot
+    restart: always
+    links:
+      - mysql
